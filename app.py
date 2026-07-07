@@ -2,18 +2,20 @@ from Workflows.graph import run_pipeline
 import streamlit as st
 from groq import RateLimitError
 import traceback
-from Tools import easy_ocr,extract_docx,extract_pdf
+from Tools.extract_pdf import extract_pdf
+from Tools.extract_docx import extract_docx
+from Tools.easy_ocr import extract_text_from_image
 
 def extract_text(uploaded_file):
     extension = uploaded_file.name.split(".")[-1].lower()
     if extension == 'pdf':
-        return extract_pdf.extract_pdf(uploaded_file)
+        return extract_pdf(uploaded_file)
     elif extension == 'docx':
-        return extract_docx.extract_docx(uploaded_file)
+        return extract_docx(uploaded_file)
     elif extension == 'txt':
         return uploaded_file.read().decode('utf-8')
     elif extension in ['pdf','jpg','jpeg']:
-        return easy_ocr.extract_text_from_image(uploaded_file)
+        return extract_text_from_image(uploaded_file)
     else:
         raise ValueError("Unsupported file type")
 st.set_page_config(
