@@ -37,6 +37,20 @@ class ResumeAgent(TypedDict):
     career_advice: dict
     ats_scorer: dict
 
+def unwrap_result(result):
+    if hasattr(result, 'content'):
+        result = result.content
+    elif isinstance(result, dict):
+        for key in ('content', 'text', 'output', 'response', 'message'):
+            if key in result:
+                result = result[key]
+                break
+    if isinstance(result, dict):
+        return "\n".join(f"{k}: {unwrap_result(v)}" for k, v in result.items())
+    if isinstance(result, list):
+        return "\n".join(unwrap_result(item) for item in result)
+    return str(result)
+
 def supervisor_node(state:ResumeAgent):
     print("Supervisor agent is thinking...")
     plan = []
@@ -52,56 +66,63 @@ def resumer_parser_node(state:ResumeAgent):
     print("Analyzing your resume")
     resume_parser = ResumeParserAgent.resume_parser(state['resume'])
     result = resume_parser['resume_parser_result']
+    clean_text = unwrap_result(result)
     return{
-        'parser':result
+        'parser':clean_text
     }
 
 def Job_analyzer_node(state:ResumeAgent):
     print("Analyzing the Job description")
     job_analyzer = JobAnalyzerAgent.job_analyzer(state['job_description'])
     result = job_analyzer['job_analyzer']
+    clean_text = unwrap_result(result)
     return{
-        'job_analyzer':result
+        'job_analyzer':clean_text
     }
 
 def Ats_scorer_node(state:ResumeAgent):
     print("Giving your resume an ATS score...")
     ats_scorer = AtsScoringAgent.ats_scorer(state['resume'])
     result = ats_scorer['ats_score']
+    clean_text = unwrap_result(result)
     return{
-        'ats_scorer':result
+        'ats_scorer':clean_text
     }
 
 def skills_gap_node(state:ResumeAgent):
     print("Analyzing your skills...")
     skills_analyzer = SkillsGapAgent.skills_agent([state['parser'],state['ats_scorer'],state['job_analyzer']])
     result = skills_analyzer['skills_parser_result']
+    clean_text = unwrap_result(result)
     return{
-        'skills':result
+        'skills':clean_text
     }
 
 def resume_improvement_node(state:ResumeAgent):
     print("Analyzing your resume for what to change...")
     final_resume = ResumeImprovementAgent.resume_improver(state['skills'])
     result = final_resume['resume_improver']
+    clean_text = unwrap_result(result)
     return{
-        'resume_improver':result
+        'resume_improver':clean_text
     }
 
 def career_advice_node(state:ResumeAgent):
     print("Giving you the best career advice...")
     career_advisor = CareerAdvisorAgent.career_advice(state['resume_improver'])
     result = career_advisor['career_advice']
+    clean_text = unwrap_result(result)
     return{
-        'career_advice':result
+        'career_advice':clean_text
     }
 
 def final_report_node(state:ResumeAgent):
     print("Generating final report...")
     final_report = ReportGeneratorAgent.generate_report(state['career_advice'])
     result = final_report['final_report']
+    clean_text = unwrap_result(result)
     return{
-        'final_report':result
+        'final_report':clean_text
     }
 
 def router_node(state:ResumeAgent):
