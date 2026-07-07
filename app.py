@@ -73,9 +73,6 @@ if st.session_state.result:
     st.markdown("### 🏨 Job Analyzer")
     st.markdown(res.get("job_analyzer", ""))
 
-    st.markdown("### 🎯 Activities")
-    st.markdown(res.get("activities", ""))
-
     st.markdown("### 💰 ATS Scorer")
     st.markdown(res.get("ats_scorer", ""))
 
@@ -86,5 +83,5 @@ if st.session_state.result:
     st.markdown(res.get('career_advice', ""))
 
     st.markdown("### Final Report")
-    st.markdown(res.get('final report'))
+    st.markdown(res.get('final_report'))
     
