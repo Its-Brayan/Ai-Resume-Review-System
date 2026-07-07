@@ -42,7 +42,7 @@ job = st.file_uploader(
 def run_async_pipeline(resume,job_description):
     return run_pipeline(resume,job_description)
 
-if st.button("Analyze Resume..."):
+if st.button("Analyze Resume"):
     if not resume:
         st.warning("Please upload a resume")
         st.stop()
@@ -63,3 +63,6 @@ if st.button("Analyze Resume..."):
             st.error(f"Error: {traceback.format_exc()} ")
 
 
+if st.session_state.result:
+    st.subheader("Generated Report")
+    st.write(st.session_state.result)
