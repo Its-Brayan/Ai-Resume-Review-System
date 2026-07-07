@@ -23,7 +23,7 @@ st.set_page_config(
 )
 st.title("📄 AI Resume Review System")
 
-st.write("Upload a resume and a job description to receive ATS analysis"
+st.write("Upload a resume and a job description to receive ATS analysis, "
           "skills matching, resume improvements, and career advice.")
 
 resume = st.file_uploader(
