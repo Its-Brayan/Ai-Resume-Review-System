@@ -4,7 +4,7 @@ from groq import RateLimitError
 import traceback
 from Tools.extract_pdf import extract_pdf
 from Tools.extract_docx import extract_docx
-from Tools.easy_ocr import extract_text_from_image
+
 
 def extract_text(uploaded_file):
     extension = uploaded_file.name.split(".")[-1].lower()
@@ -15,6 +15,7 @@ def extract_text(uploaded_file):
     elif extension == 'txt':
         return uploaded_file.read().decode('utf-8')
     elif extension in ['pdf','jpg','jpeg']:
+        from Tools.easy_ocr import extract_text_from_image
         return extract_text_from_image(uploaded_file)
     else:
         raise ValueError("Unsupported file type")
@@ -39,14 +40,17 @@ job = st.file_uploader(
 )
 
 def run_async_pipeline(resume,job_description):
-    run_pipeline(resume,job_description)
+    return run_pipeline(resume,job_description)
 
 if st.button("Analyze Resume..."):
     if not resume:
         st.warning("Please upload a resume")
         st.stop()
     resume_text = extract_text(resume)
-    job_text = extract_text(job)
+    job_text  = ''
+    if job is not None:
+
+     job_text = extract_text(job)
     # inputs = {
     #     "resume":resume,
     #     "job":job
