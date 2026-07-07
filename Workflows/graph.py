@@ -30,7 +30,7 @@ class ResumeAgent(TypedDict):
     job_description: str
     execution_plan: list[str]
     skills : dict
-    parser : dict
+    resume_parser : dict
     job_analyzer: dict
     resume_improver: dict
     final_report: dict
@@ -69,7 +69,7 @@ def resumer_parser_node(state:ResumeAgent):
     result = resume_parser['resume_parser_result']
     clean_text = unwrap_result(result)
     return{
-        'parser':clean_text
+        'resume_parser':clean_text
     }
 
 def Job_analyzer_node(state:ResumeAgent):
