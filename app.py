@@ -36,8 +36,8 @@ job = st.file_uploader(
     type=['pdf','docx','txt',"txt", "png", "jpg", "jpeg"]
 )
 
-def run_async_pipeline(inputs):
-    run_pipeline(inputs)
+def run_async_pipeline(resume,job_description):
+    run_pipeline(resume,job_description)
 
 if st.button("Analyze Resume..."):
     if not resume:
@@ -45,13 +45,13 @@ if st.button("Analyze Resume..."):
         st.stop()
     resume_text = extract_text(resume)
     job_text = extract_text(job)
-    inputs = {
-        "resume":resume,
-        "job":job
-    }
+    # inputs = {
+    #     "resume":resume,
+    #     "job":job
+    # }
     with st.spinner("Analyzing your resume..."):
         try:
-            result = run_async_pipeline(inputs)
+            result = run_async_pipeline(resume_text,job_text)
             st.session_state.result = result
         except Exception:
             st.error(f"Error: {traceback.format_exc()} ")

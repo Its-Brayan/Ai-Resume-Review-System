@@ -142,16 +142,17 @@ def run_graph() -> StateGraph:
     return workflow.compile()
 
 
-def run_pipeline(query:str):
+def run_pipeline(resume,job_description):
      print(f"\n{'='*60}")
-     print(f"Starting pipeline for {query}")
+     print(f"Starting pipeline...")
      print(f"\n{'='*60}\n")
 
      graph = run_graph()
      result = graph.invoke(
          {
-             'query':query,
-              'supervise' :{},
+             'resume':resume,
+              'job_description' :job_description,
+              'execution_plan':[],
               'skills' :{},
               'parser' : {},
               'job_analyzer': {},
