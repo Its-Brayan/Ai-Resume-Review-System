@@ -14,11 +14,15 @@ def extract_text(uploaded_file):
         return extract_docx(uploaded_file)
     elif extension == 'txt':
         return uploaded_file.read().decode('utf-8')
-    elif extension in ['pdf','jpg','jpeg']:
+    elif extension in ['png','jpg','jpeg']:
         from Tools.easy_ocr import extract_text_from_image
         return extract_text_from_image(uploaded_file)
     else:
         raise ValueError("Unsupported file type")
+
+if "result" not in st.session_state:
+    st.session_state.result = None
+
 st.set_page_config(
     page_title="Resume Analyzer",
     layout='wide'
@@ -61,6 +65,7 @@ if st.button("Analyze Resume"):
             st.session_state.result = result
         except Exception:
             st.error(f"Error: {traceback.format_exc()} ")
+
 
 
 if st.session_state.result:
