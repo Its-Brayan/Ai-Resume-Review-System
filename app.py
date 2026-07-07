@@ -72,7 +72,7 @@ if st.session_state.result:
 
     res = st.session_state.result
     st.markdown("### 🧭 Overview")
-    st.markdown(res.get("parser", ""))
+    st.markdown(res.get("resume_parser", ""))
 
     # 2. Clean sections only
     st.markdown("### 🏨 Job Analyzer")

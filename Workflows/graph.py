@@ -92,7 +92,7 @@ def Ats_scorer_node(state:ResumeAgent):
 
 def skills_gap_node(state:ResumeAgent):
     print("Analyzing your skills...")
-    skills_analyzer = SkillsGapAgent.skills_agent([state['parser'],state['ats_scorer'],state['job_analyzer']])
+    skills_analyzer = SkillsGapAgent.skills_agent([state['resume_parser'],state['ats_scorer'],state['job_analyzer']])
     result = skills_analyzer['skills_parser_result']
     clean_text = unwrap_result(result)
     return{
@@ -102,7 +102,7 @@ def skills_gap_node(state:ResumeAgent):
 def resume_improvement_node(state:ResumeAgent):
     print("Analyzing your resume for what to change...")
     combined_previous_output = {
-    "parsed_resume": state["parser"],
+    "parsed_resume": state["resume_parser"],
     "job_analysis": state["job_analyzer"],
     "skills_gap": state["skills"]
     }
@@ -116,7 +116,7 @@ def resume_improvement_node(state:ResumeAgent):
 def career_advice_node(state:ResumeAgent):
     print("Giving you the best career advice...")
     career_input = {
-    "resume": state["parser"],
+    "resume": state["resume_parser"],
     "skills": state["skills"],
     "improved_resume": state["resume_improver"]
 }
@@ -130,7 +130,7 @@ def career_advice_node(state:ResumeAgent):
 def final_report_node(state:ResumeAgent):
     print("Generating final report...")
     report = {
-    "parsed_resume": state["parser"],
+    "parsed_resume": state["resume_parser"],
     "ats": state["ats_scorer"],
     "job_analysis": state["job_analyzer"],
     "skills_gap": state["skills"],
@@ -195,7 +195,7 @@ def run_pipeline(resume,job_description):
               'job_description' :job_description,
               'execution_plan':[],
               'skills' :{},
-              'parser' : {},
+              'resume_parser' : {},
               'job_analyzer': {},
               'resume_improver':{},
               'final_report':{},
