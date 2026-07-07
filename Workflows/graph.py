@@ -116,6 +116,7 @@ def run_graph() -> StateGraph:
     workflow.add_node('job_analyzer',Job_analyzer_node)
     workflow.add_node('career_advisor',career_advice_node)
     workflow.add_node('ats_scorer',Ats_scorer_node)
+    workflow.add_node('final_report',final_report_node)
 
     workflow.set_entry_point('supervisor')
 
@@ -136,8 +137,8 @@ def run_graph() -> StateGraph:
     workflow.add_edge('job_analyzer','skills_checker')
     workflow.add_edge('skills_checker','resume_improver')
     workflow.add_edge('resume_improver','career_advisor')
-    workflow.add_edge('career_advisor','final_improver')
-    workflow.add_edge('final_improver',END)
+    workflow.add_edge('career_advisor','final_report')
+    workflow.add_edge('final_report',END)
 
     return workflow.compile()
 
