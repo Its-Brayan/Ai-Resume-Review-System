@@ -8,7 +8,7 @@ class CareerAdvisorAgent:
 
     def career_advice(self,query):
         config = load_config(CAREER_ADVISOR_AGENT_PROMPT)
-        prompt = build_prompt_body(config,query)
+        prompt = build_prompt_body(config['career_advisor_agent'],query)
         output = self.llm.invoke(prompt)
         result = {
             'career_advice':output

@@ -9,7 +9,7 @@ class JobAnalyzerAgent:
 
     def job_analyzer(self,job_description:str):
         config = load_config(JOB_ANALYZER_AGENT_PROMPT)
-        prompt = build_prompt_body(config,job_description)
+        prompt = build_prompt_body(config['job_analysis_agent'],job_description)
         output = self.llm.invoke(prompt)
         result = {
             'job_analyzer':output

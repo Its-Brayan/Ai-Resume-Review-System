@@ -7,7 +7,7 @@ class ResumeParserAgent:
 
     def resume_parser(self,resume_text:str):
         config = load_config(RESUME_PARSER_AGENT_PROMPT)
-        prompt = build_prompt_body(config,resume_text)
+        prompt = build_prompt_body(config['resume_parser_agent'],resume_text)
         output = self.llm.invoke(prompt)
         result = {
             "resume_parser_result":output

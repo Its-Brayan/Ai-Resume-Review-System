@@ -8,7 +8,7 @@ class ResumeImprovementAgent:
 
     def resume_improver(self,query:str):
         config = load_config(RESUME_IMPROVEMENT_AGENT_PROMPT)
-        prompt = build_prompt_body(config,query)
+        prompt = build_prompt_body(config['resume_improvement_agent'],query)
         output = self.llm.invoke(prompt)
         result = {
             "resume_improver":output

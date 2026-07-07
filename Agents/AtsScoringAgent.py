@@ -8,7 +8,7 @@ class AtsScoringAgent:
 
     def ats_scorer(self,resume_text:str):
         config = load_config(ATS_AGENT_PROMPT)
-        prompt = build_prompt_body(config,resume_text)
+        prompt = build_prompt_body(config['ats_review_agent'],resume_text)
         output = self.llm.invoke(prompt)
         result = {
             'ats_score':output

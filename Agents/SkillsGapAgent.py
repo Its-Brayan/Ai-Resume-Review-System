@@ -8,7 +8,7 @@ class SkillsGapAgent:
 
     def skills_agent(self,query:List[str]):
         config = load_config(SKILLS_GAP_AGENT_PROMPT)
-        prompt = build_prompt_body(config,query)
+        prompt = build_prompt_body(config['skills_matching_agent'],query)
         output = self.llm.invoke(prompt)
         result = {
             'skills_parser_result':output

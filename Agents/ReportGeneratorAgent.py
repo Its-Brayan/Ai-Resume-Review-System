@@ -8,7 +8,7 @@ class ReportGeneratorAgent:
 
     def generate_report(self,query:str):
         config = load_config(REPORT_GENERATOR_AGENT_PROMPT)
-        prompt = build_prompt_body(config,query)
+        prompt = build_prompt_body(config['report_generator_agent'],query)
         output = self.llm.invoke(prompt)
         result = {
             'final_report':output
