@@ -13,7 +13,7 @@ def extract_text(uploaded_file):
     elif extension == 'txt':
         return uploaded_file.read().decode('utf-8')
     elif extension in ['pdf','jpg','jpeg']:
-        return easy_ocr(uploaded_file)
+        return easy_ocr.extract_text_from_image(uploaded_file)
     else:
         raise ValueError("Unsupported file type")
 st.set_page_config(
