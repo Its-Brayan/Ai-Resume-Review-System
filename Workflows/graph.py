@@ -56,7 +56,8 @@ def supervisor_node(state:ResumeAgent):
     plan = []
     if state['resume']:
         plan.extend(['resume_parser','ats_scorer'])
-    elif state['job_description']:
+
+    if state['job_description']:
         plan.extend(['job_analyzer'])
     return{
         'execution_plan':plan
@@ -100,7 +101,12 @@ def skills_gap_node(state:ResumeAgent):
 
 def resume_improvement_node(state:ResumeAgent):
     print("Analyzing your resume for what to change...")
-    final_resume = ResumeImprovementAgent.resume_improver(state['skills'])
+    combined_previous_output = {
+    "parsed_resume": state["parser"],
+    "job_analysis": state["job_analyzer"],
+    "skills_gap": state["skills"]
+    }
+    final_resume = ResumeImprovementAgent.resume_improver(combined_previous_output)
     result = final_resume['resume_improver']
     clean_text = unwrap_result(result)
     return{
@@ -109,7 +115,12 @@ def resume_improvement_node(state:ResumeAgent):
 
 def career_advice_node(state:ResumeAgent):
     print("Giving you the best career advice...")
-    career_advisor = CareerAdvisorAgent.career_advice(state['resume_improver'])
+    career_input = {
+    "resume": state["parser"],
+    "skills": state["skills"],
+    "improved_resume": state["resume_improver"]
+}
+    career_advisor = CareerAdvisorAgent.career_advice(career_input)
     result = career_advisor['career_advice']
     clean_text = unwrap_result(result)
     return{
@@ -118,7 +129,15 @@ def career_advice_node(state:ResumeAgent):
 
 def final_report_node(state:ResumeAgent):
     print("Generating final report...")
-    final_report = ReportGeneratorAgent.generate_report(state['career_advice'])
+    report = {
+    "parsed_resume": state["parser"],
+    "ats": state["ats_scorer"],
+    "job_analysis": state["job_analyzer"],
+    "skills_gap": state["skills"],
+    "resume_improvements": state["resume_improver"],
+    "career_advice": state["career_advice"]
+}
+    final_report = ReportGeneratorAgent.generate_report(report)
     result = final_report['final_report']
     clean_text = unwrap_result(result)
     return{
