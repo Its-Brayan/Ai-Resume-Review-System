@@ -58,7 +58,7 @@ def resumer_parser_node(state:ResumeAgent):
 
 def Job_analyzer_node(state:ResumeAgent):
     print("Analyzing the Job description")
-    job_analyzer = JobAnalyzerAgent.job_analyzer(state['resume'])
+    job_analyzer = JobAnalyzerAgent.job_analyzer(state['job_description'])
     result = job_analyzer['job_analyzer']
     return{
         'job_analyzer':result
@@ -66,7 +66,7 @@ def Job_analyzer_node(state:ResumeAgent):
 
 def Ats_scorer_node(state:ResumeAgent):
     print("Giving your resume an ATS score...")
-    ats_scorer = AtsScoringAgent.ats_scorer(state['job_description'])
+    ats_scorer = AtsScoringAgent.ats_scorer(state['resume'])
     result = ats_scorer['ats_score']
     return{
         'ats_scorer':result
