@@ -38,10 +38,11 @@ resume = st.file_uploader(
     type=["pdf", "docx"]
 )
 
-job = st.file_uploader(
-    "Job description",
-    type=['pdf','docx','txt',"txt", "png", "jpg", "jpeg"]
+job_input_method = st.radio(
+    "Choose how to provide the job description:",
+    ["Upload File", "Paste Text"]
 )
+
 
 def run_async_pipeline(resume,job_description):
     return run_pipeline(resume,job_description)
@@ -52,9 +53,23 @@ if st.button("Analyze Resume"):
         st.stop()
     resume_text = extract_text(resume)
     job_text  = ''
-    if job is not None:
+    if job_input_method == "Upload File":
+     job = st.file_uploader(
+     "Job description",
+     type=['pdf','docx','txt',"txt", "png", "jpg", "jpeg"]
+        )
+     if job is not None:
+        job_text = extract_text(job)
+    else:
+        job_text = st.text_area(
+        "Paste the Job Description",
+        height=300,
+        placeholder="Paste the complete job description here..."
+        )
+    if not job_text.strip():
+        st.warning("Please upload or paste a job description.")
+        st.stop()
 
-     job_text = extract_text(job)
     # inputs = {
     #     "resume":resume,
     #     "job":job

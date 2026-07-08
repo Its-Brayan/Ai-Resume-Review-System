@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def get_llm(model_name:str,temperature:float = 0.2) -> BaseChatModel:
+def get_llm(model_name:str,temperature:float = 0.0) -> BaseChatModel:
 
     return ChatGroq(
         model=model_name,
