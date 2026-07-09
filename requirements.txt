@@ -669,10 +669,10 @@ typing-inspection==0.4.2
 typing_extensions==4.15.0
 tzdata==2026.2
 uncalled-for==0.3.2
-unstructured==0.22.29
-unstructured-client==0.44.0
-unstructured.pytesseract==0.3.15
-unstructured_inference==1.6.11
+# unstructured==0.22.29
+# unstructured-client==0.44.0
+# unstructured.pytesseract==0.3.15
+# unstructured_inference==1.6.11
 url-normalize==3.0.0
 urllib3==2.6.3
 urllib3-future==2.21.902
