@@ -102,9 +102,11 @@ def skills_gap_node(state:ResumeAgent):
 def resume_improvement_node(state:ResumeAgent):
     print("Analyzing your resume for what to change...")
     combined_previous_output = {
+    "original_resume":state['resume']
     "parsed_resume": state["resume_parser"],
     "job_analysis": state["job_analyzer"],
-    "skills_gap": state["skills"]
+    "skills_gap": state["skills"],
+    "ats_score":state['ats_scorer']
     }
     final_resume = ResumeImprovementAgent.resume_improver(combined_previous_output)
     result = final_resume['resume_improver']
@@ -117,6 +119,8 @@ def career_advice_node(state:ResumeAgent):
     print("Giving you the best career advice...")
     career_input = {
     "resume": state["resume_parser"],
+    "job_analyzer":state['job_analyzer'],
+    "ats_review":state['ats_scorer'],
     "skills": state["skills"],
     "improved_resume": state["resume_improver"]
 }
