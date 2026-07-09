@@ -2,23 +2,23 @@ from Workflows.graph import run_pipeline
 import streamlit as st
 # from groq import RateLimitError
 import traceback
-from Tools.extract_pdf import extract_pdf
-from Tools.extract_docx import extract_docx
+# from Tools.extract_pdf import extract_pdf
+# from Tools.extract_docx import extract_docx
 
 
-def extract_text(uploaded_file):
-    extension = uploaded_file.name.split(".")[-1].lower()
-    if extension == 'pdf':
-        return extract_pdf(uploaded_file)
-    elif extension == 'docx':
-        return extract_docx(uploaded_file)
-    elif extension == 'txt':
-        return uploaded_file.read().decode('utf-8')
-    elif extension in ['png','jpg','jpeg']:
-        from Tools.easy_ocr import extract_text_from_image
-        return extract_text_from_image(uploaded_file)
-    else:
-        raise ValueError("Unsupported file type")
+# def extract_text(uploaded_file):
+#     extension = uploaded_file.name.split(".")[-1].lower()
+#     if extension == 'pdf':
+#         return extract_pdf(uploaded_file)
+#     elif extension == 'docx':
+#         return extract_docx(uploaded_file)
+#     elif extension == 'txt':
+#         return uploaded_file.read().decode('utf-8')
+#     elif extension in ['png','jpg','jpeg']:
+#         from Tools.easy_ocr import extract_text_from_image
+#         return extract_text_from_image(uploaded_file)
+#     else:
+#         raise ValueError("Unsupported file type")
 
 if "result" not in st.session_state:
     st.session_state.result = None
@@ -63,13 +63,13 @@ if st.button("Analyze Resume"):
     if not resume:
         st.warning("Please upload a resume")
         st.stop()
-    resume_text = extract_text(resume)
+    resume_text = resume
 
     if job_input_method == "Upload File":
         if job is None:
             st.warning("Please upload a job description")
             st.stop()
-        job_text = extract_text(job)
+        job_text = job
     else:
         if not job_text.strip():
          st.warning("Please paste a job description.")
