@@ -180,7 +180,7 @@ onnx==1.21.0
 onnxruntime==1.26.0
 openai==2.24.0
 openapi-pydantic==0.5.1
-opencv-python==4.13.0.92
+# opencv-python==4.13.0.92
 opencv-python-headless==5.0.0.93
 openmeteo_requests==1.7.5
 openmeteo_sdk==1.26.0
