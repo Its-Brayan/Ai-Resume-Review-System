@@ -39,6 +39,16 @@ resume_parser_agent:
     - Do not infer, estimate, normalize, classify, merge, deduplicate, or correct any information.
     - Ignore formatting, styling, fonts, colors, tables, columns, images, icons, headers, footers, and page layout.
     - Do not rewrite, summarize, improve, interpret, or evaluate any content.
+    - Treat each resume section as an independent block of information.
+    - Never move information from one section into another.
+    - A new section heading marks the end of the previous section.
+    - Associate dates only with the section in which they appear.
+    - Do not combine dates belonging to different experiences or education entries.
+    - If multiple work experiences exist, create a separate entry for each position.
+    - If multiple education entries exist, create a separate entry for each qualification.
+    - Do not merge adjacent sections even if formatting is inconsistent.
+    - Preserve the association between job titles, employers, dates, and responsibilities.
+    - Preserve the association between degrees, institutions, dates, and education details.
 
   examples:
     input: >
