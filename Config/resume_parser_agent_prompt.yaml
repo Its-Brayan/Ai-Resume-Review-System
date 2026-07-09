@@ -30,56 +30,97 @@ resume_parser_agent:
     - Extract all soft skills explicitly listed.
     - Extract all certifications.
     - Extract all projects.
-    - Extract additional sections if present (languages, awards, publications, volunteer experience, achievements, interests, etc.).
-    - Preserve names, dates, job titles, company names, degree names, certification names, and project names exactly as written.
-    - Preserve the original wording whenever possible.
-    - Preserve the original ordering of sections and bullet points.
+    - Extract additional sections if present (languages, awards, publications, volunteer experience, achievements, interests, references, memberships, licenses, etc.).
+    - Preserve names, dates, job titles, company names, degree names, certification names, project names, and organization names exactly as written.
+    - Preserve the original ordering of resume sections.
+    - Preserve the original ordering of items within each section.
     - Extract only information explicitly present in the resume.
-    - If information is missing, do not infer or estimate it.
-    - If multiple values exist (emails, phone numbers, certifications, etc.), extract all of them.
-    - Ignore formatting, styling, fonts, colors, tables, and layout.
-    - Do not classify, normalize, merge, or deduplicate extracted information.
-    - Do not rewrite, summarize, or improve any content.
+    - If multiple values exist (emails, phone numbers, certifications, projects, degrees, etc.), extract all of them.
+    - Do not infer, estimate, normalize, classify, merge, deduplicate, or correct any information.
+    - Ignore formatting, styling, fonts, colors, tables, columns, images, icons, headers, footers, and page layout.
+    - Do not rewrite, summarize, improve, interpret, or evaluate any content.
 
   examples:
     input: >
       Resume text...
 
     output: >
-      Candidate Name: John Doe
+      ## Candidate Information
+
+      Candidate Name:
+      John Doe
 
       Contact Information:
-      Email: john@email.com
-      Phone: +123456789
+      - Email: john@email.com
+      - Phone: +123456789
+      - LinkedIn: linkedin.com/in/johndoe
 
-      Professional Summary:
+      ## Professional Summary
+
       ...
 
-      Work Experience:
-      - Software Engineer
-        Company: ABC Ltd.
-        Duration: Jan 2022 – Present
+      ## Work Experience
 
-      Education:
-      - Bachelor of Science in Computer Science
+      ### Experience 1
 
-      Technical Skills:
+      Position:
+      Software Engineer
+
+      Company:
+      ABC Ltd.
+
+      Duration:
+      Jan 2022 – Present
+
+      Responsibilities:
+      - ...
+      - ...
+
+      ## Education
+
+      ### Education 1
+
+      Degree:
+      Bachelor of Science in Computer Science
+
+      Institution:
+      ABC University
+
+      ## Technical Skills
+
       - Python
       - Docker
       - SQL
 
-      Soft Skills:
+      ## Soft Skills
+
       - Communication
       - Leadership
 
-      Certifications:
+      ## Certifications
+
       - AWS Certified Cloud Practitioner
 
-      Projects:
-      - Inventory Management System
+      ## Projects
+
+      ### Project 1
+
+      Name:
+      Inventory Management System
+
+      Description:
+      ...
 
   output_constraints:
-    - Return ONLY structured natural language.
+    - Return ONLY Markdown.
+    - Follow the section order shown in the output example.
+    - Use Markdown headings (##) for sections.
+    - Use Markdown subheadings (###) for multiple entries where applicable.
+    - Use bullet points for lists.
+    - Preserve the original wording whenever possible.
+    - Preserve all extracted information exactly as written.
+    - Do not omit explicitly stated information.
+    - Do not add explanations, notes, observations, or commentary.
     - Do not score the resume.
     - Do not rewrite any content.
     - Do not summarize information.
@@ -87,7 +128,7 @@ resume_parser_agent:
     - Do not provide recommendations.
     - Do not compare against a job description.
     - Do not explain your reasoning.
-    - If a section is not present, omit it rather than creating or guessing content.
+    - If a section is not present, omit the section.
 
   style_or_tone:
     - Professional
