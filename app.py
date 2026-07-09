@@ -47,7 +47,7 @@ job_input_method = st.radio(
 def run_async_pipeline(resume,job_description):
     return run_pipeline(resume,job_description)
 job = None
-job_text =""
+job_text = ""
 if job_input_method == "Upload File":
      job = st.file_uploader(
      "Job description",
