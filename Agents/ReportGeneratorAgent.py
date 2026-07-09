@@ -4,7 +4,7 @@ from Code.paths import REPORT_GENERATOR_AGENT_PROMPT
 from Code.load_yaml import load_config
 
 class ReportGeneratorAgent:
-    llm = get_llm('llama-3.3-70b-versatile')
+    llm = get_llm('gemini-3.5-flash')
 
     def generate_report(self,query:str):
         config = load_config(REPORT_GENERATOR_AGENT_PROMPT)

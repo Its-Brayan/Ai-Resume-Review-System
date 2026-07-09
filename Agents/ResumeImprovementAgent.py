@@ -4,7 +4,7 @@ from Code.load_yaml import load_config
 from Code.prompt_builder import build_prompt_body
 
 class ResumeImprovementAgent:
-    llm = get_llm('llama-3.3-70b-versatile')
+    llm = get_llm('gemini-3.5-flash')
 
     def resume_improver(self,query:str):
         config = load_config(RESUME_IMPROVEMENT_AGENT_PROMPT)

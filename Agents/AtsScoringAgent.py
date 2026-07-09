@@ -4,7 +4,7 @@ from Code.paths import ATS_AGENT_PROMPT
 from Code.prompt_builder import build_prompt_body
 
 class AtsScoringAgent:
-    llm = get_llm('llama-3.3-70b-versatile')
+    llm = get_llm('gemini-3.5-flash')
 
     def ats_scorer(self,resume_text:str):
         config = load_config(ATS_AGENT_PROMPT)

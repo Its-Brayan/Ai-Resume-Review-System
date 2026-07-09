@@ -3,7 +3,7 @@ from Code.load_yaml import load_config
 from Code.paths import RESUME_PARSER_AGENT_PROMPT
 from Code.prompt_builder import build_prompt_body
 class ResumeParserAgent:
-    llm = get_llm("llama-3.3-70b-versatile")
+    llm = get_llm("gemini-3.5-flash")
 
     def resume_parser(self,resume_text:str):
         config = load_config(RESUME_PARSER_AGENT_PROMPT)

@@ -5,7 +5,7 @@ from Code.load_yaml import load_config
 
 
 class JobAnalyzerAgent:
-    llm = get_llm('llama-3.3-70b-versatile')
+    llm = get_llm('gemini-3.5-flash')
 
     def job_analyzer(self,job_description:str):
         config = load_config(JOB_ANALYZER_AGENT_PROMPT)

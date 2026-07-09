@@ -4,7 +4,7 @@ from Code.paths import SKILLS_GAP_AGENT_PROMPT
 from Code.prompt_builder import build_prompt_body
 from typing import List
 class SkillsGapAgent:
-    llm = get_llm('llama-3.3-70b-versatile')
+    llm = get_llm('gemini-3.5-flash')
 
     def skills_agent(self,query:List[str]):
         config = load_config(SKILLS_GAP_AGENT_PROMPT)
