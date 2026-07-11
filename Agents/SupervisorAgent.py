@@ -4,7 +4,7 @@ from Code.llm import get_llm
 from Code.prompt_builder import build_prompt_body
 
 class SupervisorAgent:
-    llm = get_llm(model_name='llama-3.3-70b-versatile')
+    llm = get_llm(model_name='gemini-3.5-flash')
      
     def plan(self,query:str):
        config = load_config(SUPERVISOR_AGENT_PROMPT)
