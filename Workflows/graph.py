@@ -1,6 +1,6 @@
 import sys
 import os
-from typing import TypedDict
+from typing import TypedDict, Any
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0,ROOT_DIR)
 from Agents import(
@@ -26,8 +26,8 @@ ReportGeneratorAgent = ReportGeneratorAgent.ReportGeneratorAgent()
 
 
 class ResumeAgent(TypedDict):
-    resume: str
-    job_description: str
+    resume: Any
+    job_description: Any
     execution_plan: list[str]
     skills : dict
     resume_parser : dict
