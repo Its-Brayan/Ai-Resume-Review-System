@@ -15,7 +15,7 @@ class JobAnalyzerAgent:
         )
         config = load_config(JOB_ANALYZER_AGENT_PROMPT)
         prompt = build_prompt_body(config['job_analysis_agent'],file_part)
-        output = self.llm.models.generate_content(
+        output = self.client.models.generate_content(
             model='gemini-3.5-flash',
             contents=prompt
         )
