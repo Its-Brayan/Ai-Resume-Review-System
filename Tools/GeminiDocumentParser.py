@@ -1,5 +1,5 @@
 from google import genai
-
+from google.genai import types
 class GeminiDocumentParser:
     def __init__(self):
         self.client = genai.Client()
@@ -20,11 +20,14 @@ class GeminiDocumentParser:
             "certifications": []
         }
         """
-
+        file_part = types.Part.from_bytes(
+            data=uploaded_file.read(),
+            mime_type=uploaded_file.type
+        )
         response = self.client.models.generate_content(
             model="gemini-3.5-flash",
             contents=[
-                uploaded_file,
+                file_part,
                 prompt
             ]
         )
@@ -47,10 +50,15 @@ class GeminiDocumentParser:
         "education":""
     }
     """
+     file_part = types.Part.from_bytes(
+            data=uploaded_file.read(),
+            mime_type=uploaded_file.type
+        )
+   
      response = self.client.models.generate_content(
             model="gemini-3.5-flash",
             contents=[
-                uploaded_file,
+                file_part,
                 prompt
             ]
         )
