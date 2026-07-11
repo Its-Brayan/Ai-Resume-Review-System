@@ -4,7 +4,7 @@ from typing import TypedDict, Any
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0,ROOT_DIR)
 from Agents import(
-    SupervisorAgent,
+    # SupervisorAgent,
     SkillsGapAgent,
     ResumeParserAgent,
     ResumeImprovementAgent,
@@ -14,7 +14,7 @@ from Agents import(
     ReportGeneratorAgent
 )
 from langgraph.graph import StateGraph,END
-SupervisorAgent = SupervisorAgent.SupervisorAgent()
+# SupervisorAgent = SupervisorAgent.SupervisorAgent()
 SkillsGapAgent = SkillsGapAgent.SkillsGapAgent()
 ResumeParserAgent = ResumeParserAgent.ResumeParserAgent()
 ResumeImprovementAgent = ResumeImprovementAgent.ResumeImprovementAgent()
