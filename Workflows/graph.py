@@ -57,6 +57,7 @@ def supervisor_node(state:ResumeAgent):
     print("Supervisor agent is thinking...")
     supervisor = SupervisorAgent.plan([state['resume'],state['job']])
     result = supervisor['supervisor_path']
+    print(result)
     clean_text = unwrap_result(result)
     return{
         'supervisor_plan':clean_text
