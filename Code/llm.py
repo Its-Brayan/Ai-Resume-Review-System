@@ -8,7 +8,13 @@ from google.genai import types
 load_dotenv()
 
 client = genai.Client(api_key=os.getenv('GEMINI_API_KEY'))
-def get_llm():
+def get_gemini_llm():
 
     return  client
-    
+
+def get_groq_llm(model_name:str, temperature:0.0) -> BaseChatModel:
+
+    return ChatGroq(
+        model=model_name,
+        temperature=temperature
+    )

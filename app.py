@@ -2,6 +2,9 @@ from Workflows.graph import run_pipeline
 import streamlit as st
 # from groq import RateLimitError
 import traceback
+from Tools.GeminiDocumentParser import GeminiDocumentParser
+
+parser = GeminiDocumentParser()
 # from Tools.extract_pdf import extract_pdf
 # from Tools.extract_docx import extract_docx
 
@@ -63,13 +66,13 @@ if st.button("Analyze Resume"):
     if not resume:
         st.warning("Please upload a resume")
         st.stop()
-    resume_text = resume
+    resume_text = parser.parse_resume(resume)
 
     if job_input_method == "Upload File":
         if job is None:
             st.warning("Please upload a job description")
             st.stop()
-        job_text = job
+        job_text = parser.parse_job(job)
     else:
         if not job_text.strip():
          st.warning("Please paste a job description.")
