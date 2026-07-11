@@ -4,7 +4,7 @@ from Code.llm import get_groq_llm
 from Code.prompt_builder import build_prompt_body
 
 class SupervisorAgent:
-    llm = get_groq_llm(model_name='llama-3.3-70b-versatile')
+    llm = get_groq_llm('llama-3.3-70b-versatile')
      
     def plan(self,query:list):
        config = load_config(SUPERVISOR_AGENT_PROMPT)

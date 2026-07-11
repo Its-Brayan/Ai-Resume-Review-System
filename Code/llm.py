@@ -16,5 +16,6 @@ def get_groq_llm(model_name:str, temperature:int=0) -> BaseChatModel:
 
     return ChatGroq(
         model=model_name,
-        temperature=temperature
+        temperature=temperature,
+        api_key=os.getenv('GROQ_API_KEY')
     )
