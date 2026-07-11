@@ -2,7 +2,7 @@ from google import genai
 
 class GeminiDocumentParser:
     def __init__(self):
-        self.client = genai.client()
+        self.client = genai.Client()
     def parse_resume(self, uploaded_file):
 
         prompt = """
