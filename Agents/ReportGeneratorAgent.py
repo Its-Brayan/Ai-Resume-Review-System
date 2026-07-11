@@ -4,12 +4,15 @@ from Code.paths import REPORT_GENERATOR_AGENT_PROMPT
 from Code.load_yaml import load_config
 
 class ReportGeneratorAgent:
-    llm = get_llm('gemini-3.5-flash')
+    llm = get_llm()
 
     def generate_report(self,query:str):
         config = load_config(REPORT_GENERATOR_AGENT_PROMPT)
         prompt = build_prompt_body(config['report_generator_agent'],query)
-        output = self.llm.invoke(prompt)
+        output = self.llm.models.generate_content(
+            model='gemini-3.5-flash',
+            contents=prompt
+        )
         result = {
             'final_report':output
         }

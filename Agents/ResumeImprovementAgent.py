@@ -4,12 +4,15 @@ from Code.load_yaml import load_config
 from Code.prompt_builder import build_prompt_body
 
 class ResumeImprovementAgent:
-    llm = get_llm('gemini-3.5-flash')
+    llm = get_llm()
 
     def resume_improver(self,query:str):
         config = load_config(RESUME_IMPROVEMENT_AGENT_PROMPT)
         prompt = build_prompt_body(config['resume_improvement_agent'],query)
-        output = self.llm.invoke(prompt)
+        output = self.llm.models.generate_content(
+            model='gemini-3.5-flash',
+            contents=prompt
+        )
         result = {
             "resume_improver":output
         }

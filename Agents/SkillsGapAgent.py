@@ -4,12 +4,15 @@ from Code.paths import SKILLS_GAP_AGENT_PROMPT
 from Code.prompt_builder import build_prompt_body
 from typing import List
 class SkillsGapAgent:
-    llm = get_llm('gemini-3.5-flash')
+    llm = get_llm()
 
     def skills_agent(self,query:List[str]):
         config = load_config(SKILLS_GAP_AGENT_PROMPT)
         prompt = build_prompt_body(config['skills_matching_agent'],query)
-        output = self.llm.invoke(prompt)
+        output = self.llm.models.generate_content(
+            model='gemini-3.5-flash',
+            contents=prompt
+        )
         result = {
             'skills_parser_result':output
         }
