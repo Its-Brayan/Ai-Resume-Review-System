@@ -32,6 +32,7 @@ class ResumeAgent(TypedDict):
     resume:dict
     job:dict
     execution_plan: list[str]
+    selected_tasks:list[str]
     skills : dict
     resume_parser : dict
     job_analyzer: dict
@@ -244,7 +245,7 @@ def run_graph() -> StateGraph:
     return workflow.compile()
 
 
-def run_pipeline(resume,job_description):
+def run_pipeline(resume,job_description,selected_tasks):
      print(f"\n{'='*60}")
      print(f"Starting pipeline...")
      print(f"\n{'='*60}\n")
@@ -255,6 +256,7 @@ def run_pipeline(resume,job_description):
              'resume':resume,
               'job':job_description,
               'execution_plan':[],
+              'selected_tasks':selected_tasks,
               'skills' :{},
               'resume_parser' : {},
               'job_analyzer': {},

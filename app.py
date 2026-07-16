@@ -45,10 +45,33 @@ job_input_method = st.radio(
     "Choose how to provide the job description:",
     ["Upload File", "Paste Text"]
 )
+st.subheader("Choose the analyses you want")
 
+ats = st.checkbox("ATS Score")
+skills = st.checkbox("Skills Gap Analysis")
+resume = st.checkbox("Resume Improvement")
+career = st.checkbox("Career Advice")
+report = st.checkbox("Generate Final Report", value=True)
 
-def run_async_pipeline(resume,job_description):
-    return run_pipeline(resume,job_description)
+selected_tasks = []
+
+if ats:
+    selected_tasks.append("ats_scorer")
+
+if skills:
+    selected_tasks.append("skills_checker")
+
+if resume:
+    selected_tasks.append("resume_improver")
+
+if career:
+    selected_tasks.append("career_advisor")
+
+if report:
+    selected_tasks.append("final_report")
+
+def run_async_pipeline(resume,job_description,selected_tasks):
+    return run_pipeline(resume,job_description,selected_tasks)
 job = None
 job_text = ""
 if job_input_method == "Upload File":
@@ -84,7 +107,7 @@ if st.button("Analyze Resume"):
     # }
     with st.spinner("Analyzing your resume..."):
         try:
-            result = run_async_pipeline(resume_text,job_text)
+            result = run_async_pipeline(resume_text,job_text,selected_tasks)
             st.session_state.result = result
         except Exception:
             st.error(f"Error: {traceback.format_exc()} ")
@@ -95,6 +118,8 @@ if st.session_state.result:
 
     res = st.session_state.result
     st.markdown("### 🧭 Overview")
+
+    
     st.markdown(res.get("resume_parser", ""))
 
     # 2. Clean sections only
