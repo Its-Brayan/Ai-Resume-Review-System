@@ -63,5 +63,8 @@ class GeminiDocumentParser:
                 prompt
             ]
         )
+     text = response.text
+     text = text.replace("```json", "")
+     text = text.replace("```", "").strip()
 
-     return response  
+     return text
