@@ -183,8 +183,25 @@ def router_node(state:ResumeAgent):
     plan = state['execution_plan']
     if not plan:
         return state['final_report']
-    
-    return plan[0]
+
+    route_map = {
+        'ats_review': 'ats_scorer',
+        'ats_scorer': 'ats_scorer',
+        'skills_gap': 'skills_checker',
+        'resume_improver': 'resume_improver',
+        'career_advisor': 'career_advisor',
+        'report_generator': 'final_report',
+        'final_report': 'final_report'
+    }
+
+    next_step = str(plan[0]).strip().lower()
+    mapped_step = route_map.get(next_step)
+    if not mapped_step:
+        print(f"Warning: unknown execution plan step '{plan[0]}', routing to final_report")
+        mapped_step = 'final_report'
+
+    return mapped_step
+
 
 def run_graph() -> StateGraph:
     workflow = StateGraph(ResumeAgent)
