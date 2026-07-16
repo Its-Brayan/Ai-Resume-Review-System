@@ -36,7 +36,7 @@ st.title("📄 AI Resume Review System")
 st.write("Upload a resume and a job description to receive ATS analysis, "
           "skills matching, resume improvements, and career advice.")
 
-resume = st.file_uploader(
+resume_file = st.file_uploader(
     "Resume",
     type=["pdf", "docx"]
 )
@@ -49,7 +49,7 @@ st.subheader("Choose the analyses you want")
 
 ats = st.checkbox("ATS Score")
 skills = st.checkbox("Skills Gap Analysis")
-resume = st.checkbox("Resume Improvement")
+resume_improvement = st.checkbox("Resume Improvement")
 career = st.checkbox("Career Advice")
 report = st.checkbox("Generate Final Report", value=True)
 
@@ -61,7 +61,7 @@ if ats:
 if skills:
     selected_tasks.append("skills_checker")
 
-if resume:
+if resume_improvement:
     selected_tasks.append("resume_improver")
 
 if career:
@@ -86,10 +86,10 @@ elif job_input_method == "Paste Text":
         placeholder="Paste the complete job description here..."
         )
 if st.button("Analyze Resume"):
-    if not resume:
+    if not resume_file:
         st.warning("Please upload a resume")
         st.stop()
-    resume_text = parser.parse_resume(resume)
+    resume_text = parser.parse_resume(resume_file)
 
     if job_input_method == "Upload File":
         if job is None:
