@@ -26,7 +26,7 @@ class GeminiDocumentParser:
             mime_type=uploaded_file.type
         )
         response = self.client.models.generate_content(
-            model="gemini-3.5-flash",
+            model="gemini-3.1-flash-lite",
             contents=[
                 file_part,
                 prompt
@@ -57,7 +57,7 @@ class GeminiDocumentParser:
         )
    
      response = self.client.models.generate_content(
-            model="gemini-3.5-flash",
+            model="gemini-3.1-flash-lite",
             contents=[
                 file_part,
                 prompt
