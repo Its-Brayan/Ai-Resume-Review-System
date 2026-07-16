@@ -1,5 +1,6 @@
 from google import genai
 from google.genai import types
+
 class GeminiDocumentParser:
     def __init__(self):
         self.client = genai.Client()

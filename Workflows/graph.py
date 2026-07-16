@@ -60,7 +60,7 @@ def supervisor_node(state:ResumeAgent):
     print(result)
     clean_text = unwrap_result(result)
     return{
-        'supervisor_plan':clean_text
+        'execution_plan':clean_text
     }
 
 # def resumer_parser_node(state:ResumeAgent):
