@@ -54,14 +54,45 @@ def unwrap_result(result):
         return "\n".join(unwrap_result(item) for item in result)
     return str(result)
 
+
+def parse_json_output(raw_result: Any):
+    if isinstance(raw_result, (dict, list)):
+        return raw_result
+    if hasattr(raw_result, 'content'):
+        raw_result = raw_result.content
+    if isinstance(raw_result, dict):
+        for key in ('content', 'text', 'output', 'response', 'message'):
+            if key in raw_result:
+                raw_result = raw_result[key]
+                break
+    if not isinstance(raw_result, str):
+        raw_result = str(raw_result)
+
+    text = raw_result.strip()
+    text = text.replace('```json', '').replace('```', '').strip()
+
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        lines = [line.strip('- ').strip() for line in text.splitlines() if line.strip()]
+        return lines or [text]
+
+
 def supervisor_node(state:ResumeAgent):
     print("Supervisor agent is thinking...")
-    supervisor = SupervisorAgent.plan([state['resume'],state['job']])
+    supervisor = SupervisorAgent.plan([state['resume'], state['job']])
     result = supervisor['supervisor_path']
-    print(type(result))
-    clean_text = json.loads(result)
-    return{
-        'execution_plan':clean_text
+    plan = parse_json_output(result)
+
+    if isinstance(plan, dict) and 'execution_plan' in plan:
+        plan = plan['execution_plan']
+    if isinstance(plan, str):
+        plan = [plan]
+    if not isinstance(plan, list):
+        plan = [str(plan)]
+
+    return {
+        'execution_plan': plan
     }
 
 # def resumer_parser_node(state:ResumeAgent):
