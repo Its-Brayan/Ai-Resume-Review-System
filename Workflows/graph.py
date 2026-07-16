@@ -13,6 +13,7 @@ from Agents import(
     CareerAdvisorAgent,
     ReportGeneratorAgent
 )
+import json
 from langgraph.graph import StateGraph,END
 SupervisorAgent = SupervisorAgent.SupervisorAgent()
 SkillsGapAgent = SkillsGapAgent.SkillsGapAgent()
@@ -58,7 +59,7 @@ def supervisor_node(state:ResumeAgent):
     supervisor = SupervisorAgent.plan([state['resume'],state['job']])
     result = supervisor['supervisor_path']
     print(result)
-    clean_text = unwrap_result(result)
+    clean_text = json.load(result)
     return{
         'execution_plan':clean_text
     }
