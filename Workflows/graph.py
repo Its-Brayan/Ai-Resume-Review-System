@@ -59,7 +59,7 @@ def supervisor_node(state:ResumeAgent):
     supervisor = SupervisorAgent.plan([state['resume'],state['job']])
     result = supervisor['supervisor_path']
     print(type(result))
-    clean_text = json.load(result)
+    clean_text = json.loads(result)
     return{
         'execution_plan':clean_text
     }
