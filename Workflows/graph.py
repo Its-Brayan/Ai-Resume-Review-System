@@ -196,7 +196,7 @@ def final_report_node(state:ResumeAgent):
 def router_node(state:ResumeAgent):
     plan = state['execution_plan']
     if not plan:
-        return 'final_report'
+        END
 
     route_map = {
         'ats_review': 'ats_scorer',
@@ -257,13 +257,13 @@ def run_graph() -> StateGraph:
 
     return workflow.compile()
 
-
+graph = run_graph()
 def run_pipeline(resume,job_description,selected_tasks):
      print(f"\n{'='*60}")
      print(f"Starting pipeline...")
      print(f"\n{'='*60}\n")
 
-     graph = run_graph()
+    
      result = graph.invoke(
          {
              'resume':resume,
