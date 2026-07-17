@@ -85,21 +85,30 @@ elif job_input_method == "Paste Text":
         height=300,
         placeholder="Paste the complete job description here..."
         )
+tasks_requiring_job = {'skills_checker','resume_improver','career_advisor'}
 if st.button("Analyze Resume"):
     if not resume_file:
         st.warning("Please upload a resume")
         st.stop()
     resume_text = parse_document(resume_file)
-
-    if job_input_method == "Upload File":
+    job_needed = any(task in selected_tasks for task in tasks_requiring_job)
+    if job_needed:
+     if job_input_method == "Upload File":
         if job is None:
             st.warning("Please upload a job description")
             st.stop()
         job_text = parse_document(job)
-    else:
+     else:
         if not job_text.strip():
          st.warning("Please paste a job description.")
          st.stop()
+    else:
+        if job_input_method == "Upload File":
+            job_text = parse_document(job)
+        elif job_input_method == "Paste Text" and job_text.strip():
+            pass # job_text already contains the pasted text
+        else:
+            job_text = "No job description provided."
 
     # inputs = {
     #     "resume":resume,
