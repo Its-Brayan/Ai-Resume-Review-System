@@ -47,7 +47,7 @@ supervisor_agent:
         Evaluate ATS compatibility and identify keyword,
         formatting and readability issues.
 
-    skills_gap:
+    skills_checker:
       purpose: >
         Compare the resume with the job description and
         identify missing qualifications.
@@ -61,18 +61,18 @@ supervisor_agent:
         Provide career recommendations, interview preparation,
         certification suggestions and learning guidance.
 
-    report_generator:
+    final_report:
       purpose: >
         Combine completed analyses into a single report.
 
   dependency_rules:
 
     resume_improver requires:
-      - ats_review
-      - skills_gap
+      - ats_scorer
+      - skills_checker
 
     career_advisor requires:
-      - skills_gap
+      - skills_checker
 
     report_generator:
       - Must always be the final step if included.
@@ -97,7 +97,7 @@ supervisor_agent:
     output:
       {
         "execution_plan": [
-          "ats_review"
+          "ats_scorer"
         ]
       }
 
@@ -108,7 +108,7 @@ supervisor_agent:
     output:
       {
         "execution_plan": [
-          "skills_gap"
+          "skills_checker"
         ]
       }
 
@@ -119,8 +119,8 @@ supervisor_agent:
     output:
       {
         "execution_plan": [
-          "ats_review",
-          "skills_gap",
+          "ats_scorer",
+          "skills_checker",
           "resume_improver"
         ]
       }
@@ -132,7 +132,7 @@ supervisor_agent:
     output:
       {
         "execution_plan": [
-          "skills_gap",
+          "skills_checker",
           "career_advisor"
         ]
       }
@@ -148,11 +148,11 @@ supervisor_agent:
     output:
       {
         "execution_plan": [
-          "ats_review",
-          "skills_gap",
+          "ats_scorer",
+          "skills_checker",
           "resume_improver",
           "career_advisor",
-          "report_generator"
+          "final_report"
         ]
       }
 

@@ -201,22 +201,15 @@ def router_node(state:ResumeAgent):
      return END
 
     route_map = {
-        'ats_review': 'ats_scorer',
         'ats_scorer': 'ats_scorer',
-        'skills_gap': 'skills_checker',
+        'skills_checker': 'skills_checker',
         'resume_improver': 'resume_improver',
         'career_advisor': 'career_advisor',
-        'report_generator': 'final_report',
         'final_report': 'final_report'
     }
 
     next_step = str(plan[0]).strip().lower()
-    mapped_step = route_map.get(next_step)
-    if not mapped_step:
-        print(f"Warning: unknown execution plan step '{plan[0]}', routing to final_report")
-        mapped_step = 'final_report'
-
-    return mapped_step
+    return next_step
 
 
 def run_graph() -> StateGraph:
