@@ -103,7 +103,7 @@ if st.button("Analyze Resume"):
          st.warning("Please paste a job description.")
          st.stop()
     else:
-        if job_input_method == "Upload File":
+        if job_input_method == "Upload File" and job is not None:
             job_text = parse_document(job)
         elif job_input_method == "Paste Text" and job_text.strip():
             pass # job_text already contains the pasted text
