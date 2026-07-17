@@ -196,7 +196,7 @@ def final_report_node(state:ResumeAgent):
 def router_node(state:ResumeAgent):
     plan = state['execution_plan']
     if not plan:
-        END
+     return END
 
     route_map = {
         'ats_review': 'ats_scorer',
@@ -235,7 +235,7 @@ def run_graph() -> StateGraph:
     # workflow.add_edge('supervisor','ats_scorer')
     # workflow.add_edge('supervisor','job_analyzer')
     workflow.add_conditional_edges(
-        'ats_scorer',
+        'supervisor',
         router_node,
         {
        "ats_scorer": "ats_scorer",
