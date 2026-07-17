@@ -17,3 +17,4 @@ def parse_document(document: Any):
         },
         expand=["text", "markdown"]
     )
+    return result
