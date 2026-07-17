@@ -42,7 +42,7 @@ supervisor_agent:
 
   available_agents:
 
-    ats_review:
+    ats_scorer:
       purpose: >
         Evaluate ATS compatibility and identify keyword,
         formatting and readability issues.
@@ -54,7 +54,7 @@ supervisor_agent:
 
     resume_improver:
       purpose: >
-        Improve the resume using ATS Review and Skills Gap results.
+        Improve the resume using ATS Scorer and Skills Gap results.
 
     career_advisor:
       purpose: >
@@ -74,7 +74,7 @@ supervisor_agent:
     career_advisor requires:
       - skills_checker
 
-    report_generator:
+    final_report:
       - Must always be the final step if included.
 
   planning_rules:
