@@ -119,7 +119,6 @@ if st.session_state.result:
     res = st.session_state.result
    
     st.markdown("### 🧭 Overview")
-    st.markdown(res)
     
     st.markdown(res.get("resume_parser", ""))
 
