@@ -7,7 +7,7 @@ from google.genai import types
 
 
 class AtsScoringAgent:
-    llm = get_gemini_llm('deepseek-r1-distill-qwen-32b')
+    llm = get_groq_llm('deepseek-r1-distill-qwen-32b')
     def ats_scorer(self,resume):
         # resume.seek(0)
         # file_part = types.Part.from_bytes(
