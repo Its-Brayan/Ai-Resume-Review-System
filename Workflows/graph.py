@@ -235,7 +235,7 @@ def run_graph() -> StateGraph:
     # workflow.add_edge('supervisor','ats_scorer')
     # workflow.add_edge('supervisor','job_analyzer')
     workflow.add_conditional_edges(
-        'supervisor',
+        'ats_scorer',
         router_node,
         {
        "ats_scorer": "ats_scorer",
@@ -243,17 +243,18 @@ def run_graph() -> StateGraph:
         "resume_improver": "resume_improver",
         "career_advisor": "career_advisor",
         "final_report": "final_report",
+        END : END
         }
     )
     # workflow.add_edge('resume_parser','supervisor')
     # workflow.add_edge('job_analyzer','supervisor')
 
-    workflow.add_edge('ats_scorer','supervisor')
-    # workflow.add_edge('job_analyzer','skills_checker')
-    workflow.add_edge('skills_checker','supervisor')
-    workflow.add_edge('resume_improver','supervisor')
-    workflow.add_edge('career_advisor','supervisor')
-    workflow.add_edge('final_report',END)
+    # workflow.add_edge('ats_scorer','supervisor')
+    # # workflow.add_edge('job_analyzer','skills_checker')
+    # workflow.add_edge('skills_checker','supervisor')
+    # workflow.add_edge('resume_improver','supervisor')
+    # workflow.add_edge('career_advisor','supervisor')
+    # workflow.add_edge('final_report',END)
 
     return workflow.compile()
 
