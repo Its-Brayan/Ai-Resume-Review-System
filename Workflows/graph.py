@@ -81,7 +81,12 @@ def parse_json_output(raw_result: Any):
 
 def supervisor_node(state:ResumeAgent):
     print("Supervisor agent is thinking...")
-    supervisor = SupervisorAgent.plan([state['resume'], state['job']])
+    if state['execution_plan']:
+        return{}
+    supervisor = SupervisorAgent.plan({
+       "resume":state['resume'], 
+       "job":state['job'],
+       "selected_tasks":state['selected_tasks']})
     result = supervisor['supervisor_path']
     plan = parse_json_output(result)
 
@@ -118,9 +123,11 @@ def Ats_scorer_node(state:ResumeAgent):
     print("Giving your resume an ATS score...")
     ats_scorer = AtsScoringAgent.ats_scorer(state['resume'])
     result = ats_scorer['ats_score']
+    remainder = state['execution_plan'][1:]
     clean_text = unwrap_result(result)
     return{
-        'ats_scorer':clean_text
+        'ats_scorer':clean_text,
+        'execution_plan':remainder
     }
 
 def skills_gap_node(state:ResumeAgent):
@@ -129,9 +136,11 @@ def skills_gap_node(state:ResumeAgent):
         "resume":state['resume'],
         "job":state['job']})
     result = skills_analyzer['skills_parser_result']
+    remainder = state['execution_plan'][1:]
     clean_text = unwrap_result(result)
     return{
-        'skills':clean_text
+        'skills':clean_text,
+        'execution_plan':remainder
     }
 
 def resume_improvement_node(state:ResumeAgent):
@@ -144,9 +153,11 @@ def resume_improvement_node(state:ResumeAgent):
     }
     final_resume = ResumeImprovementAgent.resume_improver(combined_previous_output)
     result = final_resume['resume_improver']
+    remainder = state['execution_plan'][1:]
     clean_text = unwrap_result(result)
     return{
-        'resume_improver':clean_text
+        'resume_improver':clean_text,
+        'execution_plan':remainder
     }
 
 def career_advice_node(state:ResumeAgent):
@@ -158,9 +169,11 @@ def career_advice_node(state:ResumeAgent):
 }
     career_advisor = CareerAdvisorAgent.career_advice(career_input)
     result = career_advisor['career_advice']
+    remainder = state['execution_plan'][1:]
     clean_text = unwrap_result(result)
     return{
-        'career_advice':clean_text
+        'career_advice':clean_text,
+        'execution_plan':remainder
     }
 
 def final_report_node(state:ResumeAgent):
@@ -183,7 +196,7 @@ def final_report_node(state:ResumeAgent):
 def router_node(state:ResumeAgent):
     plan = state['execution_plan']
     if not plan:
-        return state['final_report']
+        return 'final_report'
 
     route_map = {
         'ats_review': 'ats_scorer',

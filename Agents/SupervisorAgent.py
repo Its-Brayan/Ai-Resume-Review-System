@@ -6,7 +6,7 @@ from Code.prompt_builder import build_prompt_body
 class SupervisorAgent:
     llm = get_groq_llm('llama-3.3-70b-versatile')
      
-    def plan(self,query:list):
+    def plan(self,query:dict):
        config = load_config(SUPERVISOR_AGENT_PROMPT)
        prompt = build_prompt_body(config['supervisor_agent'],query)
        print(f"Here is the prompt: {prompt}")
