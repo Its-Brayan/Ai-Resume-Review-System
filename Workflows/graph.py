@@ -188,9 +188,11 @@ def final_report_node(state:ResumeAgent):
 }
     final_report = ReportGeneratorAgent.generate_report(report)
     result = final_report['final_report']
+    remainder = state['execution_plan'][1:]
     clean_text = unwrap_result(result)
     return{
-        'final_report':clean_text
+        'final_report':clean_text,
+        'execution_plan':remainder
     }
 
 def router_node(state:ResumeAgent):
@@ -249,12 +251,12 @@ def run_graph() -> StateGraph:
     # workflow.add_edge('resume_parser','supervisor')
     # workflow.add_edge('job_analyzer','supervisor')
 
-    # workflow.add_edge('ats_scorer','supervisor')
-    # # workflow.add_edge('job_analyzer','skills_checker')
-    # workflow.add_edge('skills_checker','supervisor')
-    # workflow.add_edge('resume_improver','supervisor')
-    # workflow.add_edge('career_advisor','supervisor')
-    # workflow.add_edge('final_report',END)
+    workflow.add_edge('ats_scorer','supervisor')
+    # workflow.add_edge('job_analyzer','skills_checker')
+    workflow.add_edge('skills_checker','supervisor')
+    workflow.add_edge('resume_improver','supervisor')
+    workflow.add_edge('career_advisor','supervisor')
+    workflow.add_edge('final_report',END)
 
     return workflow.compile()
 
