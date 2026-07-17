@@ -7,7 +7,7 @@ from google.genai import types
 
 
 class AtsScoringAgent:
-    llm = get_groq_llm('ALLaM-AI/ALLaM-2.0-7B-Instruct')
+    llm = get_groq_llm('ALLaM-2-7b')
     def ats_scorer(self,resume):
         # resume.seek(0)
         # file_part = types.Part.from_bytes(
