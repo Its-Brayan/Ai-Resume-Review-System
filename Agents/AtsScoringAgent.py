@@ -17,7 +17,7 @@ class AtsScoringAgent:
         config = load_config(ATS_AGENT_PROMPT)
         prompt = build_prompt_body(config['ats_review_agent'],resume)
         output = self.llm.models.generate_content(
-            model='gemini-3.5-flash',
+            model='gemini-3.1-flash-lite',
             contents=prompt
         )
         result = {
