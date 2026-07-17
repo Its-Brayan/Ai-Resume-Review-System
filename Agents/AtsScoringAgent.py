@@ -7,7 +7,7 @@ from google.genai import types
 
 
 class AtsScoringAgent:
-    llm = get_gemini_llm()
+    llm = get_groq_llm('deepseek-r1-distill-llama-70b')
     def ats_scorer(self,resume):
         # resume.seek(0)
         # file_part = types.Part.from_bytes(
@@ -16,10 +16,7 @@ class AtsScoringAgent:
         # )
         config = load_config(ATS_AGENT_PROMPT)
         prompt = build_prompt_body(config['ats_review_agent'],resume)
-        output = self.llm.models.generate_content(
-            model='gemini-3.1-flash-lite',
-            contents=prompt
-        )
+        output = self.llm.invoke(prompt)
         result = {
             'ats_score':output
         }
