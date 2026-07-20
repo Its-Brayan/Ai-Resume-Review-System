@@ -126,14 +126,6 @@ if st.button("Analyze Resume"):
 if st.session_state.result:
 
     res = st.session_state.result
-   
-    st.markdown("### 🧭 Overview")
-    
-    st.markdown(res.get("resume_parser", ""))
-
-    # 2. Clean sections only
-    st.markdown("### 🏨 Job Analyzer")
-    st.markdown(res.get("job_analyzer", ""))
 
     st.markdown("### 💰 ATS Scorer")
     st.markdown(res.get("ats_scorer", ""))
