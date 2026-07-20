@@ -21,6 +21,7 @@ class AtsScoringAgent:
             contents=prompt
         )
         result = {
-            'ats_score':output
+            'ats_score':output.text
         }
-        return result.text
+        
+        return result
