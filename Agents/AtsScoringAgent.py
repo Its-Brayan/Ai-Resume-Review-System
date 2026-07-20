@@ -23,4 +23,4 @@ class AtsScoringAgent:
         result = {
             'ats_score':output
         }
-        return result
+        return result.text
