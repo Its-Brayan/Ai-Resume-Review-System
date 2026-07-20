@@ -127,10 +127,10 @@ if st.session_state.result:
 
     res = st.session_state.result
 
-    st.markdown("### 💰 ATS Scorer")
+    st.markdown("### ATS Scorer")
     st.markdown(res.get("ats_scorer", ""))
 
-    st.markdown("### 🗺️ Resume Improver")
+    st.markdown("### Resume Improver")
     st.markdown(res.get("resume_improver", ""))
     
     st.markdown("### Career Advice")
